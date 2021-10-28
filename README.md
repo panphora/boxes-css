@@ -1,1 +1,3 @@
-# boxes.css - focus on writing landing page content, not CSS
+# boxes.css 
+
+## Focus on writing landing page content, not CSS
