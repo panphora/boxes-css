@@ -1,8 +1,27 @@
 /*
 
-  GENERAL CSS RESET
+  boxes.css
+
+  a css framework for making landing pages
+  for people who don't like thinking about css
+
+  guiding ideas:
+  - landing pages should be simple to make
+  - you shouldn't have to think -- just write/design
+  - the page should adapt to different screen sizes automatically
 
 */
+
+/* VARIABLES */
+
+:root {
+  --default-box-width: 50vw;
+  --default-box-height: 40vw;
+  --default-box-max-width: 600px;
+  --default-box-max-height: 480px;
+}
+
+/* GENERAL CSS RESET */
 
 html {
   box-sizing: border-box;
@@ -98,12 +117,28 @@ th {
 */
 
 button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  -webkit-appearance: none;
+}
 
+button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
 }
 
 /*
 
-  BOXES.CSS MAIN
+  MAIN
 
   guiding ideas:
   - landing pages should be simple to make
@@ -112,33 +147,63 @@ button {
 
 */
 
-/* container */
+/* cute hack that lets us use the body as a container to center everything inside it */
 body {
   padding-left: calc(50vw - 600px);
   padding-right: calc(50vw - 600px);
 }
 
 /* 
-  all boxes 
+  foundation for all boxes
 
-  - floated instead of flexbox/grid
-    - flexbox would require parent rows (too many elements)
-    - grid would require predefined layout (syntax would be too complex)
+  uses flexbox for the most flexibility 😉
+  but really, it just makes it easier to align child elements 👍
 */
-body > div, body > div > div {
-  float: left;
-  font-size: 60px;
-  font-weight: bold;
-  color: #fff;
-  text-align: center;
+body, body > div, body > div > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-/* top-level boxes */
+/* 
+
+  top-level boxes 
+
+  aspect ratio = 5 width : 4 height
+
+  types:
+  - tall
+  - short
+  - wide
+  - thin
+
+*/
+
 body > div {
-  width: 50vw;
-  max-width: 600px;
-  height: 40vw;
-  max-height: 480px;
+  width: var(--default-box-width);
+  max-width: var(--default-box-max-width);
+  height: var(--default-box-height);
+  max-height: var(--default-box-max-height);
+}
+
+body > .tall {
+  height: calc(var(--default-box-height) * 2);
+  max-height: calc(var(--default-box-max-height) * 2);
+}
+
+body > .short {
+  height: calc(var(--default-box-height) / 2);
+  max-height: calc(var(--default-box-max-height) / 2);
+}
+
+body > .wide {
+  width: calc(var(--default-box-width) * 2);
+  max-width: calc(var(--default-box-max-width) * 2);
+}
+
+body > .thin {
+  width: calc(var(--default-box-width) / 2);
+  max-width: calc(var(--default-box-max-width) / 2);
 }
 
 /* second-level boxes */
@@ -150,27 +215,17 @@ body > div > div {
 }
 
 body > div > .tall {
-  float: left;
   width: 25vw;
   max-width: 300px;
   height: 40vw;
   max-height: 480px;
-  font-size: 60px;
-  font-weight: bold;
-  color: #fff;
-  text-align: center;
 }
 
 body > div > .wide {
-  float: left;
   width: 50vw;
   max-width: 600px;
   height: 20vw;
   max-height: 240px;
-  font-size: 60px;
-  font-weight: bold;
-  color: #fff;
-  text-align: center;
 }
 
 .yellow {
