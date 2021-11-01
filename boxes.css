@@ -10,16 +10,17 @@
   - you shouldn't have to think -- just write/design
   - the page should adapt to different screen sizes automatically
 
+  rules
+  - aspect ratios of boxes always maintained
+  - fewer classes the better
+  - fewer concepts the better (i.e. no container/row if possible)
+
+  features
+  - differently sized boxes with as few classes as possible
+  - navigation row with mobile menu
+  - change the background color or text color of boxes and still look good
+
 */
-
-/* VARIABLES */
-
-:root {
-  --default-box-width: 50vw;
-  --default-box-height: 40vw;
-  --default-box-max-width: 600px;
-  --default-box-max-height: 480px;
-}
 
 /* GENERAL CSS RESET */
 
@@ -140,28 +141,23 @@ button::-moz-focus-inner {
 
   MAIN
 
-  guiding ideas:
-  - landing pages should be simple to make
-  - you shouldn't have to think -- just plop some elements down
-  - typography sizes should adapt automatically based on box sizes
-
 */
 
-/* cute hack that lets us use the body as a container to center everything inside it */
-body {
-  padding-left: calc(50vw - 600px);
-  padding-right: calc(50vw - 600px);
+/* VARIABLES */
+:root {
+  --desktop-box-width: 50vw;
+  --desktop-box-height: 40vw;
+  --desktop-box-max-width: 600px;
+  --desktop-box-max-height: 480px;
 }
 
 /* 
-  foundation for all boxes
 
-  uses flexbox for the most flexibility 😉
-  but really, it just makes it easier to align child elements 👍
+  breakpoint:
+
+  mobile and default styles 
+
 */
-body > div, body > div > div {
-  float: left;
-}
 
 /* 
 
@@ -169,66 +165,101 @@ body > div, body > div > div {
 
   aspect ratio = 5 width : 4 height
 
-  types:
-  - tall
-  - short
-  - wide
-  - thin
-
 */
 
-body > div {
-  width: var(--default-box-width);
-  max-width: var(--default-box-max-width);
-  height: var(--default-box-height);
-  max-height: var(--default-box-max-height);
+body > div, body > div > div {
+  width: calc(var(--desktop-box-width) * 2);
+  max-width: calc(var(--desktop-box-max-width));
+  margin-left: auto;
+  margin-right: auto;
 }
 
-body > .tall {
-  height: calc(var(--default-box-height) * 2);
-  max-height: calc(var(--default-box-max-height) * 2);
+.padding {
+  padding: 2rem;
 }
 
-body > .short {
-  height: calc(var(--default-box-height) / 2);
-  max-height: calc(var(--default-box-max-height) / 2);
+/* 
+  media maintains its aspect ratio at small screen sizes, 
+  other boxes don't and can expand/contract their height
+  based on content
+*/
+body > .media, body > div > .media {
+  height: calc(var(--desktop-box-height) * 2);
+  max-height: calc(var(--desktop-box-max-height));
 }
 
-body > .wide {
-  width: calc(var(--default-box-width) * 2);
-  max-width: calc(var(--default-box-max-width) * 2);
+/* 
+
+  breakpoint:
+
+  tablet and desktop devices 
+
+*/
+@media (min-width: 600px) {
+
+/*  body > div {
+    height: calc(var(--desktop-box-height) * 2);
+    max-height: calc(var(--desktop-box-max-height));
+  }*/
+
+  /* 
+    
+    second-level boxes 
+
+    aspect ratio = 5 width : 4 height
+
+    types:
+    - tall
+    - wide
+
+  */
+
+  body > div > div {
+    float: left;
+    width: 50%;
+    height: 50%;
+  }
+
+  body > div > .tall {
+    height: 100%;
+  }
+
+  body > div > .wide {
+    width: 100%;
+  }
+
 }
 
-body > .thin {
-  width: calc(var(--default-box-width) / 2);
-  max-width: calc(var(--default-box-max-width) / 2);
-}
+/* 
 
-/* second-level boxes */
-body > div > div {
-  width: 50%;
-  height: 50%;
-}
+  breakpoint:
 
-body > div > .tall {
-  height: 100%;
-}
+  desktop devices 
 
-body > div > .short {
-  height: 25%;
-}
+*/
+@media (min-width: 1100px) {
 
-body > div > .wide {
-  width: 100%;
-}
+  /* cute hack that lets us use the body as a container to center everything inside it */
+  body {
+    padding-left: calc(50vw - 600px);
+    padding-right: calc(50vw - 600px);
+  }
 
-body > div > .thin {
-  width: 25%;
-}
+  /* 
 
-/* breakpoint */
+    top-level boxes 
 
-@media (max-width: 1100px) {
+    aspect ratio = 5 width : 4 height
+
+  */
+
+  body > div {
+    float: left;
+    width: var(--desktop-box-width);
+    max-width: var(--desktop-box-max-width);
+    height: var(--desktop-box-height);
+    max-height: var(--desktop-box-max-height);
+  }
 
 }
 
