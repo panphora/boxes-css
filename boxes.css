@@ -168,6 +168,7 @@ button::-moz-focus-inner {
 */
 
 body > div, body > div > div {
+  overflow: hidden;
   width: calc(var(--desktop-box-width) * 2);
   max-width: calc(var(--desktop-box-max-width));
   margin-left: auto;
@@ -197,10 +198,10 @@ body > .media, body > div > .media {
 */
 @media (min-width: 600px) {
 
-/*  body > div {
+  body > div {
     height: calc(var(--desktop-box-height) * 2);
     max-height: calc(var(--desktop-box-max-height));
-  }*/
+  }
 
   /* 
     
