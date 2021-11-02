@@ -35,7 +35,7 @@ html {
 body {
   min-height: 100vh;
   font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
-  line-height: 1.5;
+  line-height: 1.44;
   -webkit-font-smoothing: subpixel-antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -180,13 +180,14 @@ body > div, body > div > div {
 }
 
 /* 
-  media maintains its aspect ratio at small screen sizes, 
-  other boxes don't and can expand/contract their height
-  based on content
+  media boxes always maintain their aspect ratios 
+  other boxes don't maintain this aspect ratio on mobile
+  and can expand/contract their height based on their content
 */
 body > .media, body > div > .media {
   height: calc(var(--desktop-box-height) * 2);
   max-height: calc(var(--desktop-box-max-height));
+  padding: 0;
 }
 
 /* 
@@ -198,6 +199,11 @@ body > .media, body > div > .media {
 */
 @media (min-width: 600px) {
 
+  /* 
+    on tablet, non-media boxes still maintain their width to height aspect ratio 
+    they lose this defined height on mobile, where the content of the box is 
+    allowed to determine the height of the box
+  */
   body > div {
     height: calc(var(--desktop-box-height) * 2);
     max-height: calc(var(--desktop-box-max-height));
@@ -215,17 +221,17 @@ body > .media, body > div > .media {
 
   */
 
-  body > div > div {
+  body > div > div, body > div > .media {
     float: left;
     width: 50%;
     height: 50%;
   }
 
-  body > div > .tall {
+  body > div > .tall, body > div > .tall.media {
     height: 100%;
   }
 
-  body > div > .wide {
+  body > div > .wide, body > div > .wide.media {
     width: 100%;
   }
 
@@ -240,7 +246,10 @@ body > .media, body > div > .media {
 */
 @media (min-width: 1100px) {
 
-  /* cute hack that lets us use the body as a container to center everything inside it */
+  /* 
+    cute hack that lets us use the body as a container to center 
+    everything inside it 
+  */
   body {
     padding-left: calc(50vw - 600px);
     padding-right: calc(50vw - 600px);
@@ -254,7 +263,7 @@ body > .media, body > div > .media {
 
   */
 
-  body > div {
+  body > div, body > .media {
     float: left;
     width: var(--desktop-box-width);
     max-width: var(--desktop-box-max-width);
