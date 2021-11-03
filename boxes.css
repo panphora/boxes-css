@@ -167,7 +167,7 @@ button::-moz-focus-inner {
 
 */
 
-body > div, body > div > div {
+body > section, body > section > section {
   overflow: hidden;
   width: calc(var(--desktop-box-width) * 2);
   max-width: calc(var(--desktop-box-max-width) * 1.25);
@@ -194,7 +194,7 @@ body > div, body > div > div {
   padding: 0;
 }
 
-body > .media, body > div > .media {
+body > .media, body > section > .media {
   height: calc(var(--desktop-box-height) * 2);
   max-height: calc(var(--desktop-box-max-height) * 1.25);
 }
@@ -222,7 +222,7 @@ body > .media, body > div > .media {
     they lose this defined height on mobile, where the content of the box is 
     allowed to determine the height of the box
   */
-  body > div {
+  body > section {
     height: calc(var(--desktop-box-height) * 2);
     max-height: calc(var(--desktop-box-max-height) * 1.25);
   }
@@ -239,17 +239,17 @@ body > .media, body > div > .media {
 
   */
 
-  body > div > div, body > div > .media {
+  body > section > section, body > section > .media {
     float: left;
     width: 50%;
     height: 50%;
   }
 
-  body > div > .tall, body > div > .tall.media {
+  body > section > .tall, body > section > .tall.media {
     height: 100%;
   }
 
-  body > div > .wide, body > div > .wide.media {
+  body > section > .wide, body > section > .wide.media {
     width: 100%;
   }
 
@@ -281,7 +281,7 @@ body > .media, body > div > .media {
 
   */
 
-  body > div, body > .media {
+  body > section, body > .media {
     float: left;
     width: var(--desktop-box-width);
     max-width: var(--desktop-box-max-width);
