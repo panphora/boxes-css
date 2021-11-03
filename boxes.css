@@ -175,6 +175,11 @@ body > div, body > div > div {
   margin-right: auto;
 }
 
+/* 
+  we don't just default to giving all non-media boxes padding because
+  we can have nested boxes and we don't want the parent box to have padding
+  in that case
+*/
 .padding {
   padding: 2rem;
 }
@@ -184,10 +189,23 @@ body > div, body > div > div {
   other boxes don't maintain this aspect ratio on mobile
   and can expand/contract their height based on their content
 */
+.media {
+  position: relative;
+  padding: 0;
+}
+
 body > .media, body > div > .media {
   height: calc(var(--desktop-box-height) * 2);
   max-height: calc(var(--desktop-box-max-height) * 1.25);
-  padding: 0;
+}
+
+.media img, .media svg, .media video, .media iframe, .media object, .media embed, .media picture, .media canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* 
