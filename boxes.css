@@ -166,10 +166,10 @@ button:hover {
 input[type="text"], input[type="email"] {
   display: block;
   width: 100%;
-  height: 58px;
+  height: 54px;
   padding: 0px 16px;
   line-height: 58px;
-  border: 1px solid #141561;
+  border: 1px solid rgba(20, 20, 20, .75);
   border-radius: 2px;
 }
 
@@ -222,10 +222,15 @@ input[type="text"], input[type="email"] {
 }
 
 /* 
-  SPACE UTILITIES 
+  SPACING
 
   todo: decide whether to keep these or not
 */
+
+/* technique from: https://every-layout.dev/layouts/stack/ */
+section *:not(section) + *:not(section) {
+  margin-top: 1rem;
+}
 
 .spacer-1 {
   flex: 0 0 auto;
