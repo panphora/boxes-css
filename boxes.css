@@ -280,6 +280,12 @@ button {
   text-shadow: 0 1px 2px rgba(0,0,0,.20);
 }
 
+section.yellow button {
+  color: #fff;
+  background: #6D28D9;
+  background: linear-gradient(12deg, #6D28D9 85%, #9c74f7 100%);
+}
+
 button:hover {
   background: #f255a3;
   background: linear-gradient(12deg, #f255a3 85%, #fc9dc1 100%);
@@ -290,7 +296,7 @@ button:hover {
 input:not([type]), input[type="text"], input[type="email"] {
   display: block;
   width: 100%;
-  padding: 16px 16px;
+  padding: 15px 16px 17px;
   border: 1px solid rgba(20, 20, 20, .75);
   border-radius: 2px;
 }
