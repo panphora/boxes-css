@@ -265,32 +265,39 @@ section *:not(section) + *:not(section) {
   line-height: 1.4;
 }
 
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  margin-bottom: -.1em;
+}
+
 /* FORMS */
 
 /* default button style */
 button {
-  padding: 0 2rem;
-  height: 58px;
+  padding: 17px 2rem 19px;
   color: #fff;
   font-weight: bold;
-  background: #EC4899;
-  background: linear-gradient(12deg, #EC4899 85%, #F894BA 100%);
+  background: #DB2777;
+  background: linear-gradient(12deg, #DB2777 85%, #F472B6 100%);
   border-radius: 9999px;
   box-shadow: 1px 2px 3px rgba(0,0,0,.2);
   text-shadow: 0 1px 2px rgba(0,0,0,.20);
 }
 
+button:hover {
+  filter: brightness(102%) saturate(104%);
+}
+
+/* purple button */
 section.yellow button {
   color: #fff;
   background: #6D28D9;
   background: linear-gradient(12deg, #6D28D9 85%, #9c74f7 100%);
 }
 
-button:hover {
-  background: #f255a3;
-  background: linear-gradient(12deg, #f255a3 85%, #fc9dc1 100%);
-  box-shadow: 1px 2px 6px rgba(0,0,0,.3);
+section.yellow button:hover {
+  filter: brightness(105%) saturate(107%);
 }
+
 
 /* text & email inputs */
 input:not([type]), input[type="text"], input[type="email"] {
