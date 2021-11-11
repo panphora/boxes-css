@@ -307,6 +307,17 @@ section.yellow .button:not(.secondary):hover {
   filter: brightness(105%) saturate(107%);
 }
 
+/* orange button */
+section.blue .button:not(.secondary) {
+  color: #fff;
+  background: #f07602;
+  background: linear-gradient(12deg, #f07602 85%, #f07602 100%);
+}
+
+section.blue .button:not(.secondary):hover {
+  filter: brightness(105%) saturate(107%);
+}
+
 /* secondary button */
 .button.secondary {
   color: #273345;
@@ -550,7 +561,7 @@ body > .media, body > section > .media {
 }
 
 .blue {
-  background-color: #0aa1ff;
+  background-color: #1395ff;
 }
 
 .yellow {
