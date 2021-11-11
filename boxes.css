@@ -161,31 +161,31 @@ button::-moz-focus-inner {
   text-align: center;
 }
 
-.text-thin {
+.weight-100, .text-thin {
   font-weight: 100;
 }
-.text-extra-light, .text-ultra-light {
+.weight-200, .text-extra-light, .text-ultra-light {
   font-weight: 200;
 }
-.text-light {
+.weight-300, .text-light {
   font-weight: 300;
 }
-.text-normal, .text-book, .text-regular {
+.weight-400, .text-normal, .text-book, .text-regular {
   font-weight: 400;
 }
-.text-medium {
+.weight-500, .text-medium {
   font-weight: 500;
 }
-.text-semi-bold, .text-demi-bold {
+.weight-600, .text-semi-bold, .text-demi-bold {
   font-weight: 600;
 }
-.text-bold {
+.weight-700, .text-bold {
   font-weight: 700;
 }
-.text-extra-bold, .text-ultra-bold {
+.weight-800, .text-extra-bold, .text-ultra-bold {
   font-weight: 800;
 }
-.text-black, .text-heavy {
+.weight-900, .text-black, .text-heavy {
   font-weight: 900;
 }
 
