@@ -311,7 +311,7 @@ section.yellow .button:not(.secondary):hover {
 section.blue .button:not(.secondary) {
   color: #fff;
   background: #f07602;
-  background: linear-gradient(12deg, #f07602 85%, #f07602 100%);
+  background: linear-gradient(12deg, #f07602 85%, #fdaa5b 100%);
 }
 
 section.blue .button:not(.secondary):hover {
