@@ -274,10 +274,13 @@ section *:not(section) + *:not(section) {
 /* FORMS */
 
 /* default button style */
-button, .button {
+.button {
   padding: 17px 2rem 19px;
-  color: #fff;
   font-weight: bold;
+}
+
+:not(section.yellow) .button:not(.secondary) {
+  color: #fff;
   background: #DB2777;
   background: linear-gradient(12deg, #DB2777 85%, #F472B6 100%);
   border-radius: 9999px;
@@ -285,38 +288,39 @@ button, .button {
   text-shadow: 0 1px 2px rgba(0,0,0,.20);
 }
 
-button:hover, .button:hover {
+.button:not(.secondary):hover {
   filter: brightness(102%) saturate(104%);
 }
 
-button + button, .button + .button, button + .button, .button + button {
+.button + .button {
   margin-left: 11px;
 }
 
 /* purple button */
-section.yellow button, section.yellow .button {
+section.yellow .button:not(.secondary) {
   color: #fff;
   background: #6D28D9;
   background: linear-gradient(12deg, #6D28D9 85%, #9c74f7 100%);
 }
 
-section.yellow button:hover, section.yellow .button:hover {
+section.yellow .button:not(.secondary):hover {
   filter: brightness(105%) saturate(107%);
 }
 
 /* secondary button */
-section.yellow button.secondary, section.yellow .button.secondary {
+.button.secondary {
   color: #273345;
   text-decoration: underline;
   text-decoration-color: rgba(0,0,0,.4);
   border-radius: 9999px;
-  background: rgba(255,255,255,.124);
+  background: rgba(255,255,255,.22);
   box-shadow: 1px 2px 3px rgba(0,0,0,.1);
   text-shadow: none;
 }
 
-section.yellow button.secondary:hover, section.yellow .button.secondary:hover {
-  filter: brightness(90%) saturate(104%);
+.button.secondary:hover {
+  color: #111827;
+  background: rgba(255,255,255,.1);
 }
 
 
@@ -541,31 +545,15 @@ body > .media, body > section > .media {
 }
 
 
-.yellow {
-  background-color: #FBBF24;
+.green {
+  background-color: #00d07d;
 }
 
 .blue {
-  background-color: #3B82F6;
+  background-color: #0aa1ff;
 }
 
-.purple {
-  background-color: #8B5CF6;
-}
-
-.pink {
-  background-color: #EC4899;
-}
-
-.green {
-  background-color: #10B981;
-}
-
-.red {
-  background-color: #EF4444;
-}
-
-.indigo {
-  background-color: #6366F1;
+.yellow {
+  background-color: #FBBF24;
 }
 
