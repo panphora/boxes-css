@@ -299,8 +299,8 @@ section *:not(section) + *:not(section) {
 /* purple button */
 section.yellow .button:not(.secondary) {
   color: #fff;
-  background: #6D28D9;
-  background: linear-gradient(12deg, #6D28D9 85%, #9c74f7 100%);
+  background: #7c19e6;
+  background: linear-gradient(12deg, #7c19e6 85%, #a45eee 100%);
 }
 
 section.yellow .button:not(.secondary):hover {
@@ -315,6 +315,17 @@ section.blue .button:not(.secondary) {
 }
 
 section.blue .button:not(.secondary):hover {
+  filter: brightness(102%) saturate(104%);
+}
+
+/* blue button */
+section.green .button:not(.secondary) {
+  color: #fff;
+  background: #4429d4;
+  background: linear-gradient(12deg, #4429d4 85%, #745fde 100%);
+}
+
+section.green .button:not(.secondary):hover {
   filter: brightness(105%) saturate(107%);
 }
 
@@ -561,7 +572,7 @@ body > .media, body > section > .media {
 }
 
 .blue {
-  background-color: #1395ff;
+  background-color: #0f97fc;
 }
 
 .yellow {
