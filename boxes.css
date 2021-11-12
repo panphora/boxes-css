@@ -202,36 +202,12 @@ section *:not(section) + *:not(section) {
   margin-top: 1rem;
 }
 
-.spacer-1 {
-  flex: 0 0 auto;
-  height: 8px;
-  width: 8px;
-}
-
-.spacer-2 {
-  flex: 0 0 auto;
-  height: 16px;
-  width: 16px;
-}
-
-.spacer-3 {
-  flex: 0 0 auto;
-  height: 24px;
-  width: 24px;
-}
-
-.spacer-4 {
-  flex: 0 0 auto;
-  height: 32px;
-  width: 32px;
-}
-
 /* 
   we don't just default to giving all non-media boxes padding because
   we can have nested boxes and we don't want the parent box to have padding
   in that case
 */
-.padding {
+.content {
   padding: 1.6rem 2rem; /* 4:5 ratio, same as boxes */
 }
 
@@ -456,7 +432,7 @@ body > .media, body > section > .media {
     but they lose this defined height on mobile, where the content of the box is 
     allowed to determine the height of the box
   */
-  body > section {
+  body > section:not(.content) {
     height: calc(var(--desktop-box-height) * 2);
     max-height: calc(var(--desktop-box-max-height) * 1.25);
   }
