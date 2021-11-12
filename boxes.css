@@ -279,7 +279,7 @@ section *:not(section) + *:not(section) {
   font-weight: bold;
 }
 
-:not(section.yellow) .button:not(.secondary) {
+:not(section.background-yellow) .button:not(.secondary) {
   color: #fff;
   background: #ed3488;
   background: linear-gradient(12deg, #ed3488 85%, #f37ab1 100%);
@@ -297,35 +297,35 @@ section *:not(section) + *:not(section) {
 }
 
 /* purple button */
-section.yellow .button:not(.secondary) {
+section.background-yellow .button:not(.secondary) {
   color: #fff;
   background: #7c19e6;
   background: linear-gradient(12deg, #7c19e6 85%, #a45eee 100%);
 }
 
-section.yellow .button:not(.secondary):hover {
+section.background-yellow .button:not(.secondary):hover {
   filter: brightness(105%) saturate(107%);
 }
 
 /* orange button */
-section.blue .button:not(.secondary) {
+section.background-blue .button:not(.secondary) {
   color: #fff;
   background: #f07602;
   background: linear-gradient(12deg, #f07602 85%, #fdaa5b 100%);
 }
 
-section.blue .button:not(.secondary):hover {
+section.background-blue .button:not(.secondary):hover {
   filter: brightness(102%) saturate(104%);
 }
 
 /* blue button */
-section.green .button:not(.secondary) {
+section.background-green .button:not(.secondary) {
   color: #fff;
   background: #4429d4;
   background: linear-gradient(12deg, #4429d4 85%, #745fde 100%);
 }
 
-section.green .button:not(.secondary):hover {
+section.background-green .button:not(.secondary):hover {
   filter: brightness(105%) saturate(107%);
 }
 
@@ -340,7 +340,7 @@ section.green .button:not(.secondary):hover {
   text-shadow: none;
 }
 
-section:not(.yellow):not(.green):not(.blue) .button.secondary {
+section:not(.background-yellow):not(.background-green):not(.background-blue) .button.secondary {
   box-shadow: 1px 1px 4px rgba(0,0,0,.16);
 }
 
@@ -349,7 +349,7 @@ section:not(.yellow):not(.green):not(.blue) .button.secondary {
   background: rgba(255,255,255,.25);
 }
 
-section:not(.yellow):not(.green):not(.blue) .button.secondary:hover {
+section:not(.background-yellow):not(.background-green):not(.background-blue) .button.secondary:hover {
   color: #111827;
   background: #F9FAFB;
 }
@@ -576,15 +576,15 @@ body > .media, body > section > .media {
 }
 
 
-.green {
+.background-green {
   background-color: #00d07d;
 }
 
-.blue {
+.background-blue {
   background-color: #0f97fc;
 }
 
-.yellow {
+.background-yellow {
   background-color: #FBBF24;
 }
 
