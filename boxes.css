@@ -157,6 +157,40 @@ button::-moz-focus-inner {
   --desktop-box-max-height: 480px;
 }
 
+/* COLORS */
+
+.white {
+  color: #fff;
+}
+
+.black {
+  color: #111827;
+}
+
+.green {
+  color: #00965a;
+}
+
+.blue {
+  color: #007dfa;
+}
+
+.yellow {
+  color: #e67700;
+}
+
+.background-green {
+  background-color: #00d07d;
+}
+
+.background-blue {
+  background-color: #0f97fc;
+}
+
+.background-yellow {
+  background-color: #FBBF24;
+}
+
 /* TEXT UTILITIES */
 
 .text-center {
@@ -549,18 +583,5 @@ body > .media, body > section > .media {
     max-height: var(--desktop-box-max-height);
   }
 
-}
-
-
-.background-green {
-  background-color: #00d07d;
-}
-
-.background-blue {
-  background-color: #0f97fc;
-}
-
-.background-yellow {
-  background-color: #FBBF24;
 }
 
