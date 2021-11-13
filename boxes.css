@@ -581,17 +581,23 @@ body > .media, body > section > .media {
 
     top-level boxes 
 
+    every type of top-level box (i.e. section) should maintain its
+    aspect ration on desktop devices
+
+    on tablet and mobile, only .media boxes should maintain their
+    aspect ratios
+
     aspect ratio = 5 width : 4 height
 
   */
 
-  body > section, body > section.media {
+  body > section, body > section.content, body > section.media {
     float: left;
     /* need to use % instead of vw because scrollbars in MS Edge take up width but aren't included in vw */
     width: 50%;
     max-width: var(--desktop-box-max-width);
-    height: var(--desktop-box-height) !important;
-    max-height: var(--desktop-box-max-height) !important;
+    height: var(--desktop-box-height);
+    max-height: var(--desktop-box-max-height);
   }
 
 }
