@@ -225,6 +225,14 @@ button::-moz-focus-inner {
   font-weight: 900;
 }
 
+/* ALIGNMENT */
+
+.vertical-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 /* 
   SPACING
 
@@ -285,8 +293,15 @@ section *:not(section) + *:not(section) {
 
 /* default button style */
 .button {
+  overflow: visible;
+  flex: 0 0 auto;
+  align-self: flex-start;
+  display: inline-block;
+  white-space: nowrap;
+  margin-right: 11px;
   padding: 17px 2rem 19px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 :not(section.background-yellow) .button:not(.secondary) {
@@ -300,10 +315,6 @@ section *:not(section) + *:not(section) {
 
 .button:not(.secondary):hover {
   filter: brightness(102%) saturate(104%);
-}
-
-.button + .button {
-  margin-left: 11px;
 }
 
 /* purple button */
@@ -574,13 +585,13 @@ body > .media, body > section > .media {
 
   */
 
-  body > section, body > .media {
+  body > section, body > section.media {
     float: left;
     /* need to use % instead of vw because scrollbars in MS Edge take up width but aren't included in vw */
     width: 50%;
     max-width: var(--desktop-box-max-width);
-    height: var(--desktop-box-height);
-    max-height: var(--desktop-box-max-height);
+    height: var(--desktop-box-height) !important;
+    max-height: var(--desktop-box-max-height) !important;
   }
 
 }
