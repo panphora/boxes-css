@@ -413,7 +413,7 @@ input:not([type]), input[type="text"], input[type="email"] {
   transition: transform 200ms;
 }
 
-/* 
+/*
 
   breakpoint:
 
@@ -594,14 +594,33 @@ body > .media, body > section > .media {
 
   */
 
-  body > section, body > section.content, body > section.media {
+  body > section:not(.content), body > section.content, body > section.media {
     float: left;
-    /* need to use % instead of vw because scrollbars in MS Edge take up width but aren't included in vw */
+    /* 
+      using % width instead of vw because scrollbars in MS Edge take up 
+      width but aren't included in the vw units, which makes each top-level
+      box half a scrollbar width too wide
+    */
     width: 50%;
     max-width: var(--desktop-box-max-width);
     height: var(--desktop-box-height);
     max-height: var(--desktop-box-max-height);
   }
 
+  body > section.wide {
+    width: 100%;
+    max-width: calc(var(--desktop-box-max-width) * 2);
+  }
+
+  body > section.tall {
+    height: calc(var(--desktop-box-height) * 2);
+    max-height: calc(var(--desktop-box-max-height) * 2);
+  }
+
 }
+
+
+
+
+
 
