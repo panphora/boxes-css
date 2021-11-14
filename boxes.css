@@ -473,8 +473,11 @@ body > .media, body > section > .media {
 @media (min-width: 600px) {
 
   /* 
-    on tablet, non-media boxes still maintain their width to height aspect ratio 
-    but they lose this defined height on mobile, where the content of the box is 
+    on tablet, top-level non-content boxes (just like media boxes) maintain 
+    their aspect ratio, primarily so they're able to contain child boxes that 
+    also maintain their aspect ratio
+
+    they lose this aspect ratio on mobile, where the content of the box is 
     allowed to determine the height of the box
   */
   body > section:not(.content) {
