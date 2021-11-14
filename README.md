@@ -2,7 +2,7 @@
 
 ## Focus on writing landing page content, not CSS
 
-Boxes.css is the framework I always dreamed of.
+Boxes.css is the framework I've always dreamed of.
 
 I want to launch a project every week, but in order to do that I need to:
 
