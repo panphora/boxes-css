@@ -13,7 +13,7 @@ I want to launch a project every week, but in order to do that I need to:
 
 Boxes.css let's me just focus on the first step
 
-1. Write content
+1. **Write content**
 
 And takes care of the rest:
 
