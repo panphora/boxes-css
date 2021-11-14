@@ -14,10 +14,10 @@ I want to launch new projects every week or two, but I need to:
 
 Boxes.css lets me just focus on the first two steps
 
-1. **Write content**
+1. Write content
 2. Drop it into a page
 
-✅😍
+✅
 
 And takes care of the rest:
 
