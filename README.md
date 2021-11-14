@@ -6,8 +6,13 @@
 
 always use `section` elements to define boxes
 
-Use class `.media`
-Use class `.content`
+Use class `.media` when wanting to include an image, animation, or video on the page
+* Contains an `img`, `svg`, or `video` element
+* Will maintain the media's aspect ratio (5:4) no matter what screen size the user is using (mobile / tablet / desktop)
+
+Use class `.content` when wanting to include headings, text, or form controls on the page
+* Contains `h1-h6`, `p`, `div`, `form`, `input`, `button`, `a`
+* Will maintain the box's aspect ratio (5:4) on desktop devices only &mdash; on smaller screen sizes (e.g. tablet, mobile) the amount of content will determine the box's size
 
 ### what is a box
 
