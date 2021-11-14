@@ -197,31 +197,31 @@ button::-moz-focus-inner {
   text-align: center;
 }
 
-.weight-100, .text-thin {
+.font-weight-100, .font-weight-thin {
   font-weight: 100;
 }
-.weight-200, .text-extra-light, .text-ultra-light {
+.font-weight-200, .font-weight-extra-light, .font-weight-ultra-light {
   font-weight: 200;
 }
-.weight-300, .text-light {
+.font-weight-300, .font-weight-light {
   font-weight: 300;
 }
-.weight-400, .text-normal, .text-book, .text-regular {
+.font-weight-400, .font-weight-normal, .font-weight-book, .font-weight-regular {
   font-weight: 400;
 }
-.weight-500, .text-medium {
+.font-weight-500, .font-weight-medium {
   font-weight: 500;
 }
-.weight-600, .text-semi-bold, .text-demi-bold {
+.font-weight-600, .font-weight-semi-bold, .font-weight-demi-bold {
   font-weight: 600;
 }
-.weight-700, .text-bold {
+.font-weight-700, .font-weight-bold {
   font-weight: 700;
 }
-.weight-800, .text-extra-bold, .text-ultra-bold {
+.font-weight-800, .font-weight-extra-bold, .font-weight-ultra-bold {
   font-weight: 800;
 }
-.weight-900, .text-black, .text-heavy {
+.font-weight-900, .font-weight-black, .font-weight-heavy {
   font-weight: 900;
 }
 
@@ -525,10 +525,6 @@ body > .media, body > section > .media {
 */
 
 @media (min-width: 1100px) and (max-width: 1199.999px) {
-
-  body {
-    font-size: 18px;
-  }
 
   .h1 {
     font-size: 54px;

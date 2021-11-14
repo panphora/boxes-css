@@ -4,9 +4,17 @@
 
 ### types of boxes
 
-
 Use class `.media`
-Use class `.padding`
+Use class `.content`
+
+### floating labels with inputs
+
+```html
+  <div class="floating-label-container">
+    <input id="email" type="email" name="email" placeholder="Enter your email address">
+    <label for="email">Enter your email address</label>
+  </div>
+```
 
 ### how to make SVGs responsive
 
