@@ -499,6 +499,15 @@ body > section, body > section > section {
 /* 
   on mobile, top-level media boxes and second-level media boxes
   become the same size — full-width & full-height (5:4)
+
+  how they maintain their aspect ratio: on mobile, the width is always 100% 
+  (i.e. pretty much 100vw except on MS Edge where there's a slight difference) 
+  and the height is always 40vw * 2 = 80vw, so the aspect ration of 5:4
+  is preserved with 100vw:80vw
+
+  and on tablet, where the top-level boxes are allowed to expand to max-width
+  (600px) * 1.25 and max-height (480px) * 1.25, the aspect ratio is preserved
+  there as well -- just 125% larger than on desktop/mobile
 */
 body > .media, body > section > .media {
   height: calc(var(--desktop-box-height) * 2);
@@ -533,20 +542,24 @@ body > .media, body > section > .media {
 
     they lose this aspect ratio on mobile, where the content of the box is 
     allowed to determine the height of the box
+
+    (note: we exclude media boxes here because the same styles are already
+      defined for media boxes on mobile, so it's unnecessary)
   */
-  body > section:not(.content) {
+  body > section:not(.content):not(.media) {
     height: calc(var(--desktop-box-height) * 2);
     max-height: calc(var(--desktop-box-max-height) * 1.25);
   }
 
-  body > section.media.wide {
-    width: 100%;
-    max-width: calc(var(--desktop-box-max-width) * 2);
-  }
-
   /* 
     
-    second-level boxes 
+    second-level / nested boxes 
+
+    these are always inside a non-media, non-content box and expand to fill
+    some percentage of their container
+
+    on mobile, they're allowed to lose their aspect ratio and just fill up
+    as much as their content needs
 
     aspect ratio = 5 width : 4 height
 
