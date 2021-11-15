@@ -234,14 +234,50 @@ button::-moz-focus-inner {
 }
 
 /* 
+
   SPACING
 
-  todo: decide whether to keep these or not
 */
 
 /* technique from: https://every-layout.dev/layouts/stack/ */
-section *:not(section) + *:not(section) {
+section *:not(section, .h1, .h2, .h3) + *:not(section, .h1, .h2, .h3, .h4, .h5, .h6) {
   margin-top: 1rem;
+}
+
+section .h1 + *:not(section, .h1, .h2, .h3, .h4, .h5, .h6) {
+  margin-top: 1.35rem;
+}
+
+section .h2 + *:not(section, .h1, .h2, .h3, .h4, .h5, .h6) {
+  margin-top: 1.25rem;
+}
+
+section .h3 + *:not(section, .h1, .h2, .h3, .h4, .h5, .h6) {
+  margin-top: 1.15rem;
+}
+
+section *:not(section) + .h1 {
+  margin-top: 2px;
+}
+
+section *:not(section) + .h2 {
+  margin-top: 3px;
+}
+
+section *:not(section) + .h3 {
+  margin-top: 4px;
+}
+
+section *:not(section) + .h4 {
+  margin-top: 5px;
+}
+
+section *:not(section) + .h5 {
+  margin-top: 6px;
+}
+
+section *:not(section) + .h6 {
+  margin-top: 7px;
 }
 
 /* 
@@ -283,10 +319,6 @@ section *:not(section) + *:not(section) {
 .h6 {
   font-size: 21px;
   line-height: 1.4;
-}
-
-.h1, .h2, .h3, .h4, .h5, .h6 {
-  margin-bottom: -.1em;
 }
 
 /* FORMS */
