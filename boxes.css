@@ -527,6 +527,52 @@ body > .media, body > section > .media {
 
   breakpoint:
 
+  mobile devices (320px - 599.999px)
+
+  difficult spot because top-level boxes get down to a minimum of 
+  320px width here, the smallest that top-level boxes can get
+
+  this doesn't leave a lot of room for content — especially for 
+  long words
+
+*/
+
+@media (max-width: 549.999px) {
+  .h1 {
+    font-size: 38px;
+    line-height: 1.15;
+  }
+
+  .h2 {
+    font-size: 34px;
+    line-height: 1.2;
+  }
+
+  .h3 {
+    font-size: 30px;
+    line-height: 1.25;
+  }
+
+  .h4 {
+    font-size: 24px;
+    line-height: 1.3;
+  }
+
+  .h5 {
+    font-size: 21px;
+    line-height: 1.3;
+  }
+
+  .h6 {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+}
+
+/* 
+
+  breakpoint:
+
   tablet and desktop devices 
 
 */
@@ -593,6 +639,10 @@ body > .media, body > section > .media {
 
   difficult spot because it's the only place where a boxes with text in them
   shrink AND can't expand vertically (like they can on mobile)
+
+  top-level boxes get to a minumum of 550px width
+
+  second-level boxes get to a minimum of 275px width (smallest possible box)
 
 */
 
@@ -662,7 +712,7 @@ body > .media, body > section > .media {
 
   */
 
-  body > section:not(.content), body > section.content, body > section.media {
+  body > section:not(.content):not(.media), body > section.content, body > section.media {
     float: left;
     /* 
       using % width instead of vw because scrollbars in MS Edge take up 

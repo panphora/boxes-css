@@ -47,6 +47,10 @@ it's always responsive by default and maintains its aspect ratio where it makes 
 
 the goal of a box is that you define how it looks on one screen size (e.g. desktop) and it automatically will adapt to look good on every other screen size (e.g. tablet & mobile)
 
+## headings
+
+use classes `.h1`, `.h2`, etc. to determine size
+
 ## floating labels with inputs
 
 In order to save room, while also being accessible, boxes.css has the concept of an input that contains its own label
