@@ -191,6 +191,18 @@ button::-moz-focus-inner {
   background-color: #FBBF24;
 }
 
+.background-light-green {
+  background-color: #b0f5ca;
+}
+
+.background-light-blue {
+  background-color: #BEEDFB;
+}
+
+.background-light-yellow {
+  background-color: #fef4d8;
+}
+
 /* TEXT UTILITIES */
 
 .text-center {
@@ -350,35 +362,35 @@ section *:not(section) + .h6 {
 }
 
 /* purple button */
-section.background-yellow .button:not(.secondary) {
+section.background-yellow .button:not(.secondary), section.background-light-blue .button:not(.secondary) {
   color: #fff;
   background: #7c19e6;
   background: linear-gradient(12deg, #7c19e6 85%, #a45eee 100%);
 }
 
-section.background-yellow .button:not(.secondary):hover {
+section.background-yellow .button:not(.secondary):hover, section.background-light-blue .button:not(.secondary):hover {
   filter: brightness(105%) saturate(107%);
 }
 
 /* orange button */
-section.background-blue .button:not(.secondary) {
+section.background-blue .button:not(.secondary), section.background-light-yellow .button:not(.secondary) {
   color: #fff;
   background: #f07602;
   background: linear-gradient(12deg, #f07602 85%, #fdaa5b 100%);
 }
 
-section.background-blue .button:not(.secondary):hover {
+section.background-blue .button:not(.secondary):hover, section.background-light-yellow .button:not(.secondary):hover {
   filter: brightness(102%) saturate(104%);
 }
 
 /* blue button */
-section.background-green .button:not(.secondary) {
+section.background-green .button:not(.secondary), section.background-light-green .button:not(.secondary) {
   color: #fff;
   background: #4429d4;
   background: linear-gradient(12deg, #4429d4 85%, #745fde 100%);
 }
 
-section.background-green .button:not(.secondary):hover {
+section.background-green .button:not(.secondary):hover, section.background-light-green .button:not(.secondary):hover {
   filter: brightness(105%) saturate(107%);
 }
 
@@ -393,6 +405,7 @@ section.background-green .button:not(.secondary):hover {
   text-shadow: none;
 }
 
+/* darker shadow on some backgrounds */
 section:not(.background-yellow):not(.background-green):not(.background-blue) .button.secondary {
   box-shadow: 1px 1px 4px rgba(0,0,0,.16);
 }
