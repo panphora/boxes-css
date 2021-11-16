@@ -537,9 +537,36 @@ body > .media, body > section > .media {
 }
 
 body > section.wide.media {
-  width: 100%;
-  height: var(--desktop-box-height);
-  max-height: calc(var(--desktop-box-max-height) * .625);
+  height: var(--desktop-box-height); /* half normal height */
+  max-height: calc(var(--desktop-box-max-height) * .625); /* half normal height */
+}
+
+body > section.tall.media {
+  height: calc(var(--desktop-box-height) * 2 * 2); /* double normal height */
+  max-height: calc(var(--desktop-box-max-height) * 1.25 * 2); /* double normal height */
+}
+
+/*
+  
+  Boxes.css warnings!
+
+*/
+
+body > section.wide:not(.media):not(.content)::before, body > section.tall:not(.media):not(.content)::before {
+  display: inline-block;
+  content: "BOXES.CSS WARNING \A\A .wide boxes aren't supported at the top-level unless they're .media or .content boxes";
+  white-space: pre-wrap;
+  padding: 2px 5px;
+  color: #DC2626;
+  background: #FEF2F2;
+}
+
+body > section.wide:not(.media):not(.content)::before {
+  content: "BOXES.CSS WARNING \A\A .wide boxes aren't supported at the top-level unless they're .media or .content boxes";
+}
+
+body > section.tall:not(.media):not(.content)::before {
+  content: "BOXES.CSS WARNING \A\A .tall boxes aren't supported at the top-level unless they're .media or .content boxes";
 }
 
 /* 
