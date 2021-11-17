@@ -531,7 +531,10 @@ body > .media, body > section > .media {
   position: absolute;
   top: 0;
   left: 0;
-  /* fill in gap between media and box that sometimes appears by adding 2px */
+  /* 
+    fill in gap between media and box that sometimes appears 
+    (by adding 2px to media's width and height) 
+  */
   width: calc(100% + 2px);
   height: calc(100% + 2px);
   object-fit: cover;
