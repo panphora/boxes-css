@@ -209,31 +209,31 @@ button::-moz-focus-inner {
   text-align: center;
 }
 
-.font-weight-100, .font-weight-thin {
+[class~="100"], .font-weight-100, .font-weight-thin {
   font-weight: 100;
 }
-.font-weight-200, .font-weight-extra-light, .font-weight-ultra-light {
+[class~="200"], .font-weight-200, .font-weight-extra-light, .font-weight-ultra-light {
   font-weight: 200;
 }
-.font-weight-300, .font-weight-light {
+[class~="300"], .font-weight-300, .font-weight-light {
   font-weight: 300;
 }
-.font-weight-400, .font-weight-normal, .font-weight-book, .font-weight-regular {
+[class~="400"], .font-weight-400, .font-weight-normal, .font-weight-book, .font-weight-regular {
   font-weight: 400;
 }
-.font-weight-500, .font-weight-medium {
+[class~="500"], .font-weight-500, .font-weight-medium {
   font-weight: 500;
 }
-.font-weight-600, .font-weight-semi-bold, .font-weight-demi-bold {
+[class~="600"], .font-weight-600, .font-weight-semi-bold, .font-weight-demi-bold {
   font-weight: 600;
 }
-.font-weight-700, .font-weight-bold {
+[class~="700"], .font-weight-700, .font-weight-bold {
   font-weight: 700;
 }
-.font-weight-800, .font-weight-extra-bold, .font-weight-ultra-bold {
+[class~="800"], .font-weight-800, .font-weight-extra-bold, .font-weight-ultra-bold {
   font-weight: 800;
 }
-.font-weight-900, .font-weight-black, .font-weight-heavy {
+[class~="900"], .font-weight-900, .font-weight-black, .font-weight-heavy {
   font-weight: 900;
 }
 
@@ -828,10 +828,37 @@ body > section.tall:not(.media):not(.content)::before {
 }
 
 
+/*
+
+  DISPLAY UTILITIES
+
+*/
+
+.inline {
+  display: inline;
+}
+.block {
+  display: block;
+}
+.flex {
+  display: flex;
+}
+.grid {
+  display: grid;
+}
+.inline-block {
+  display: inline-block;
+}
+.inline-grid {
+  display: inline-grid;
+}
+.inline-flex {
+  display: inline-flex;
+}
 
 /*
 
-  RESPONSIVE UTILITIES
+  RESPONSIVE SHOW/HIDE UTILITIES
 
 */
 
