@@ -85,10 +85,5 @@ this will ensure that part of your media is never cut off on any screen size and
 [source](https://stackoverflow.com/questions/19484707/how-can-i-make-an-svg-scale-with-its-parent-container)
 
 
-### known issues
-
-* Images inside `.media` boxes sometimes don't expand to fill the entire box — there's a slight 1-2px gap ([example of thin white border to the right of the image](https://websharebox.s3.amazonaws.com/Screen%20Shot%202021-11-13%20at%2010.54.29%20PM.png))
-  * This bug doesn't arise on most screen sizes and isn't that noticeable, so we're deciding not to fix it for now
-  * It can be easily fixed by setting the size of media to `101%` width and height instead of the current `100%`, but this will mean on most screen sizes `1%` of the media will be cut off
 
 
