@@ -70,11 +70,13 @@ Syntax:
 </div>
 ```
 
-## how to deal with media
+## dealing with media
 
 always create media that has a 5:4 ration (width:height)
 
 this will ensure that part of your media is never cut off on any screen size and will always look the same no matter what size device the user is viewing your website on
+
+tip: since wide content works better on desktop and tablet and tall content works better on mobile, you may want to consider making one pieces of media in both formats (wide and tall) and only show the wide version on tablet and desktop and the tall one on mobile
 
 ## how to make SVGs responsive
 
