@@ -298,6 +298,9 @@ section *:not(section) + .h6 {
   in that case
 */
 .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 1.6rem 2rem; /* 4:5 ratio, same as boxes */
 }
 
@@ -346,6 +349,7 @@ section *:not(section) + .h6 {
   padding: 17px 2rem 19px;
   font-weight: bold;
   cursor: pointer;
+  text-decoration: none;
 }
 
 :not(section.background-yellow) .button:not(.secondary) {
