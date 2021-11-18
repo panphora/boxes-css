@@ -180,27 +180,53 @@ button::-moz-focus-inner {
 }
 
 .background-green {
+  color: #111827;
   background-color: #00d07d;
 }
 
 .background-blue {
+  color: #111827;
   background-color: #0f97fc;
 }
 
 .background-yellow {
+  color: #111827;
   background-color: #FBBF24;
 }
 
 .background-light-green {
+  color: #111827;
   background-color: #b0f5ca;
 }
 
 .background-light-blue {
+  color: #111827;
   background-color: #BEEDFB;
 }
 
 .background-light-yellow {
+  color: #111827;
   background-color: #fef4d8;
+}
+
+.background-dark {
+  color: #fff;
+  background-color: #111827;
+}
+
+.background-dark-green {
+  color: #fff;
+  background-color: #052920;
+}
+
+.background-dark-blue {
+  color: #fff;
+  background-color: #0f1c42;
+}
+
+.background-dark-yellow {
+  color: #fff;
+  background-color: #241912;
 }
 
 /* TEXT UTILITIES */
@@ -422,6 +448,14 @@ section:not(.background-yellow):not(.background-green):not(.background-blue) .bu
 section:not(.background-yellow):not(.background-green):not(.background-blue) .button.secondary:hover {
   color: #111827;
   background: #F9FAFB;
+}
+
+/* on dark background */
+[class*="background-dark"] .button.secondary {
+  background: rgba(255,255,255,.9);
+}
+[class*="background-dark"] .button.secondary:hover {
+  background: rgba(255,255,255,1);
 }
 
 
