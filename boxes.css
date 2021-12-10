@@ -1,3 +1,11 @@
+/* VARIABLES */
+:root {
+  --desktop-box-width: 50vw;
+  --desktop-box-height: 40vw;
+  --desktop-box-max-width: 600px;
+  --desktop-box-max-height: 480px;
+}
+
 /*
 
   boxes.css
@@ -69,6 +77,11 @@ h6 {
   padding: 0;
 }
 
+fieldset {
+  border: 0;
+  min-width: 0;
+}
+
 h1,
 h2,
 h3,
@@ -80,7 +93,8 @@ h6 {
 }
 
 ul {
-  list-style: none;
+  /*list-style: none;*/
+  padding-left: 20px;
 }
 
 button,
@@ -143,18 +157,339 @@ button::-moz-focus-inner {
   padding: 0;
 }
 
+/* 
+ 
+  ANCHORS / LINKS
+
+*/
+
+a {
+  color: #111827;
+}
+
+a:hover {
+  color: #6B7280;
+}
+
 /*
 
   MAIN
 
 */
 
-/* VARIABLES */
-:root {
-  --desktop-box-width: 50vw;
-  --desktop-box-height: 40vw;
-  --desktop-box-max-width: 600px;
-  --desktop-box-max-height: 480px;
+/* 
+
+  TOP-LEVEL LAYOUT BOXES
+
+  the core of boxes.css
+
+*/
+
+/*
+
+  breakpoint:
+
+  mobile and default styles 
+
+*/
+
+/* 
+
+  top-level and second-level boxes 
+
+  aspect ratio = 5 width : 4 height
+
+*/
+
+body > section, body > section > section, body > .content:not(section) {
+  /*
+    all boxes on mobile are 100% width
+
+    need to use % instead of vw because scrollbars in MS Edge take up width 
+    but aren't included in vw 
+  */
+  width: 100%;
+  /* 
+    for tablet viewport: let the boxes expand a little and not leave 
+    so much whitespace on the left/right sides of the screen
+
+    it won't expand larger than 100% width on mobile, so no worries
+  */
+  max-width: calc(var(--desktop-box-max-width) * 1.25);
+
+  /*
+    for tablet viewport: center all top-level boxes in the middle of the screen
+  */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body > section::after, body > section > section::after, body > .content:not(section)::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* 
+  
+  Content boxes
+
+  Have padding and alignment by default -- the opposite of media boxes
+
+  If used on the top-level without being attached to a `section` element,
+  then ON DESKTOP they don't maintain their aspect ratio and determine 
+  their own height -- and they also (somewhat weirdly) switch to a flex
+  direction of row instead of column
+
+  ON TABLET, top-level content boxes (even if they're attached to a `section`
+  element) don't maintain an aspect ratio
+
+  Non-aspect ratio boxes (i.e. content boxes that don't use a section elem) 
+  are great for:
+  - a page-wide navigation menu
+  - a footer section
+  - a container for a single heading
+  - adding some vertical space or separator
+
+*/
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1.6rem 2rem; /* 4:5 ratio, same as boxes */
+}
+
+.content:not(section) {
+  flex-direction: row;
+  justify-content: start;
+}
+
+/* 
+  MEDIA BOXES
+
+  media boxes always maintain their aspect ratios, even on mobile
+  other boxes don't maintain this aspect ratio on mobile
+*/
+.media {
+  position: relative;
+  padding: 0;
+}
+
+/* 
+  on mobile, top-level media boxes and second-level media boxes
+  become the same size — full-width & full-height (5:4)
+
+  how they maintain their aspect ratio: on mobile, the width is always 100% 
+  (i.e. pretty much 100vw except on MS Edge where there's a slight difference) 
+  and the height is always 40vw * 2 = 80vw, so the aspect ration of 5:4
+  is preserved with 100vw:80vw
+
+  and on tablet, where the top-level boxes are allowed to expand to max-width
+  (600px) * 1.25 and max-height (480px) * 1.25, the aspect ratio is preserved
+  there as well -- just 125% larger than on desktop/mobile
+*/
+body > .media, body > section > .media {
+  height: calc(var(--desktop-box-height) * 2);
+  max-height: calc(var(--desktop-box-max-height) * 1.25);
+}
+
+.media img, .media svg, .media video, .media iframe, .media object, .media embed, .media picture, .media canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* 
+  in order to maintain their aspect ratio on smaller viewports, we need to
+  artificially decrease the height of wide media boxes
+*/
+body > section.wide.media {
+  height: var(--desktop-box-height); /* half normal height */
+  max-height: calc(var(--desktop-box-max-height) * .625); /* half normal height */
+}
+
+/* 
+  in order to maintain their aspect ratio on smaller viewports, we need to
+  artificially increase the height of tall media boxes
+*/
+body > section.tall.media {
+  height: calc(var(--desktop-box-height) * 2 * 2); /* double normal height */
+  max-height: calc(var(--desktop-box-max-height) * 1.25 * 2); /* double normal height */
+}
+
+/* 
+
+  breakpoint:
+
+  tablet and desktop devices 
+
+*/
+@media (min-width: 600px) {
+
+  /* 
+    on tablet, top-level non-content boxes (just like media boxes) maintain 
+    their aspect ratio, primarily so they're able to contain child boxes that 
+    also maintain their aspect ratio
+
+    on tablet, top-level content boxes lose their aspect ratio so they can
+    expand/contract their height as necessary
+
+    they lose this aspect ratio on mobile, where the content of the box is 
+    allowed to determine the height of the box
+
+    (note: we exclude media boxes here because the same styles are already
+      defined for media boxes on mobile, so it's just unnecessary)
+  */
+  body > section:not(.content):not(.media) {
+    height: calc(var(--desktop-box-height) * 2);
+    max-height: calc(var(--desktop-box-max-height) * 1.25);
+  }
+
+  /* 
+    
+    second-level / nested boxes 
+
+    these are always inside a non-media, non-content box and expand to fill
+    some percentage of their container
+
+    on mobile, they're allowed to lose their aspect ratio and just fill up
+    as much as their content needs
+
+    aspect ratio = 5 width : 4 height
+
+    types:
+    - tall
+    - wide
+
+  */
+
+  body > section > section, body > section > .media {
+    float: left;
+    width: 50%;
+    height: 50%;
+  }
+
+  body > section > .tall, body > section > .tall.media {
+    height: 100%;
+  }
+
+  body > section > .wide, body > section > .wide.media {
+    width: 100%;
+  }
+
+}
+
+/* 
+
+  breakpoint:
+
+  desktop devices 
+
+*/
+@media (min-width: 1100px) {
+
+  /* 
+    cute hack that lets us use the body as a container to center 
+    everything inside it 
+  */
+  body {
+    padding-left: calc(50vw - 600px);
+    padding-right: calc(50vw - 600px);
+  }
+
+  /* 
+
+    top-level boxes 
+
+    every type of top-level box (i.e. section) should maintain its
+    aspect ration on desktop devices
+
+    on tablet and mobile, only .media boxes should maintain their
+    aspect ratios
+
+    aspect ratio = 5 width : 4 height
+
+  */
+
+  body > section:not(.content):not(.media), 
+  body > section.content, 
+  body > section.media, 
+  body > section.content.wide, 
+  body > section.media.wide,
+  body > .content:not(section) {
+    float: left;
+    /* 
+      using % width instead of vw because scrollbars in MS Edge take up 
+      width but aren't included in the vw units, which makes each top-level
+      box half a scrollbar width too wide
+    */
+    width: 50%;
+    max-width: var(--desktop-box-max-width);
+    height: var(--desktop-box-height);
+    max-height: var(--desktop-box-max-height);
+  }
+
+  /* 
+    
+    Wide and tall variants of top-level boxes
+    
+  */
+
+  body > section.wide.media, body > section.wide.content {
+    width: 100%;
+    max-width: calc(var(--desktop-box-max-width) * 2);
+  }
+
+  body > section.tall.media, body > section.tall.content {
+    height: calc(var(--desktop-box-height) * 2);
+    max-height: calc(var(--desktop-box-max-height) * 2);
+  }
+
+  /* 
+    
+    Non-aspect-ratio, top-level content boxes
+    
+  */
+  body > .content:not(section) {
+    height: auto;
+    max-height: auto;
+  }
+
+  body > .content.wide:not(section) {
+    width: 100%;
+    max-width: 100%;
+  }
+
+}
+
+
+
+/*
+  
+  Boxes.css debug warnings!
+
+*/
+
+body > section.wide:not(.media):not(.content)::before, body > section.tall:not(.media):not(.content)::before {
+  display: inline-block;
+  content: "BOXES.CSS WARNING \A\A .wide boxes aren't supported at the top-level unless they're .media or .content boxes";
+  white-space: pre-wrap;
+  padding: 2px 5px;
+  color: #DC2626;
+  background: #FEF2F2;
+}
+
+body > section.wide:not(.media):not(.content)::before {
+  content: "BOXES.CSS WARNING \A\A .wide boxes aren't supported at the top-level unless they're .media or .content boxes";
+}
+
+body > section.tall:not(.media):not(.content)::before {
+  content: "BOXES.CSS WARNING \A\A .tall boxes aren't supported at the top-level unless they're .media or .content boxes";
 }
 
 /* COLORS */
@@ -231,10 +566,6 @@ button::-moz-focus-inner {
 
 /* TEXT UTILITIES */
 
-.text-center {
-  text-align: center;
-}
-
 [class~="100"], .font-weight-100, .font-weight-thin {
   font-weight: 100;
 }
@@ -263,6 +594,36 @@ button::-moz-focus-inner {
   font-weight: 900;
 }
 
+/* OPACITY */
+
+[class~=".9"] {
+  opacity: .9;
+}
+[class~=".85"] {
+  opacity: .85;
+}
+[class~=".8"] {
+  opacity: .8;
+}
+[class~=".75"] {
+  opacity: .75;
+}
+[class~=".7"] {
+  opacity: .7;
+}
+[class~=".65"] {
+  opacity: .65;
+}
+[class~=".6"] {
+  opacity: .6;
+}
+[class~=".55"] {
+  opacity: .55;
+}
+[class~=".5"] {
+  opacity: .5;
+}
+
 /* ALIGNMENT */
 
 .vertical-center {
@@ -271,66 +632,146 @@ button::-moz-focus-inner {
   justify-content: center;
 }
 
+.vertical-top, .content.vertical-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.horizontal-left {
+  flex-direction: row;
+  justify-content: start;
+}
+
+.center, .content.center:not(section) {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-align {
+  text-align: left;
+}
+
+
+@media (min-width: 1100px) {
+
+  /* SHIFT CONTENTS TO CENTER */
+
+  .desktop-shift-contents-left-to-center > * {
+    transform: translate(-100%, 0);
+  }
+
+  .desktop-body-top-space-same-as-sides {
+    padding-top: calc(50vw - var(--desktop-box-max-width));
+  }
+
+  /* SHIFT CONTENTS OTHER AMOUNTS */
+
+  .desktop-shift-contents-left-small > * {
+    transform: translateX(-.75rem);
+  }
+
+  .desktop-shift-contents-right-small > * {
+    transform: translateX(.75rem);
+  }
+
+  .desktop-shift-contents-left > * {
+    transform: translateX(-1.5rem);
+  }
+
+  .desktop-shift-contents-right > * {
+    transform: translateX(1.5rem);
+  }
+
+  .desktop-shift-contents-left-large > * {
+    transform: translateX(-3rem);
+  }
+
+  .desktop-shift-contents-right-large > * {
+    transform: translateX(3rem);
+  }
+}
+
 /* 
 
   SPACING
 
+  stacking technique from: https://every-layout.dev/layouts/stack/
+
 */
 
-/* technique from: https://every-layout.dev/layouts/stack/ */
-section *:not(section, .h1, .h2, .h3) + *:not(section, .h1, .h2, .h3, .h4, .h5, .h6) {
+/*
+  
+  The default spacing between elements: 1rem
+
+*/
+
+.content * + * {
   margin-top: 1rem;
 }
 
-section .h1 + *:not(section, .h1, .h2, .h3, .h4, .h5, .h6) {
+/*
+  
+  Spacing between LARGE headings and the next element is LARGE
+
+*/
+
+.content .h1 + *,
+.content h1 + * {
   margin-top: 1.35rem;
 }
 
-section .h2 + *:not(section, .h1, .h2, .h3, .h4, .h5, .h6) {
+.content .h2 + *,
+.content h2 + * {
   margin-top: 1.25rem;
 }
 
-section .h3 + *:not(section, .h1, .h2, .h3, .h4, .h5, .h6) {
+.content .h3 + *,
+.content h3 + * {
   margin-top: 1.15rem;
 }
 
-section *:not(section) + .h1 {
-  margin-top: 2px;
-}
-
-section *:not(section) + .h2 {
-  margin-top: 3px;
-}
-
-section *:not(section) + .h3 {
-  margin-top: 4px;
-}
-
-section *:not(section) + .h4 {
-  margin-top: 5px;
-}
-
-section *:not(section) + .h5 {
-  margin-top: 6px;
-}
-
-section *:not(section) + .h6 {
-  margin-top: 7px;
-}
+/* TYPOGRAPHY */
 
 /* 
-  we don't just default to giving all non-media boxes padding because
-  we can have nested boxes and we don't want the parent box to have padding
-  in that case
+
+   headings 
+
+   have default font size and line height, but they can be
+   overwritten by using heading classes like .h1, .h2, .h3
+
 */
-.content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 1.6rem 2rem; /* 4:5 ratio, same as boxes */
+
+h1 {
+  font-size: 60px;
+  line-height: 1.1;
 }
 
-/* TYPOGRAPHY */
+h2 {
+  font-size: 48px;
+  line-height: 1.15;
+}
+
+h3 {
+  font-size: 36px;
+  line-height: 1.2;
+}
+
+h4 {
+  font-size: 30px;
+  line-height: 1.25;
+}
+
+h5 {
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+h6 {
+  font-size: 21px;
+  line-height: 1.4;
+}
 
 .h1 {
   font-size: 60px;
@@ -362,9 +803,17 @@ section *:not(section) + .h6 {
   line-height: 1.4;
 }
 
-/* FORMS */
+/* 
 
-/* default button style */
+  FORMS & BUTTONS
+
+*/
+
+/* 
+
+  Primary button (default)
+
+*/
 .button {
   display: inline-block;
   overflow: visible;
@@ -378,7 +827,8 @@ section *:not(section) + .h6 {
   text-decoration: none;
 }
 
-:not(section.background-yellow) .button:not(.secondary) {
+/* default style for primary buttons that aren't on a yellow background */
+:not(.background-yellow) .button:not(.secondary) {
   color: #fff;
   background: #ed3488;
   background: linear-gradient(12deg, #ed3488 85%, #f37ab1 100%);
@@ -391,40 +841,44 @@ section *:not(section) + .h6 {
   filter: brightness(102%) saturate(104%);
 }
 
-/* purple button */
-section.background-yellow .button:not(.secondary), section.background-light-blue .button:not(.secondary) {
+/* purple button on yellow background */
+.background-yellow .button:not(.secondary), .background-light-blue .button:not(.secondary) {
   color: #fff;
   background: #7c19e6;
   background: linear-gradient(12deg, #7c19e6 85%, #a45eee 100%);
 }
 
-section.background-yellow .button:not(.secondary):hover, section.background-light-blue .button:not(.secondary):hover {
+.background-yellow .button:not(.secondary):hover, .background-light-blue .button:not(.secondary):hover {
   filter: brightness(105%) saturate(107%);
 }
 
-/* orange button */
-section.background-blue .button:not(.secondary), section.background-light-yellow .button:not(.secondary) {
+/* orange button on blue background */
+.background-blue .button:not(.secondary), .background-light-yellow .button:not(.secondary) {
   color: #fff;
   background: #f07602;
   background: linear-gradient(12deg, #f07602 85%, #fdaa5b 100%);
 }
 
-section.background-blue .button:not(.secondary):hover, section.background-light-yellow .button:not(.secondary):hover {
+.background-blue .button:not(.secondary):hover, .background-light-yellow .button:not(.secondary):hover {
   filter: brightness(102%) saturate(104%);
 }
 
-/* blue button */
-section.background-green .button:not(.secondary), section.background-light-green .button:not(.secondary) {
+/* blue button on green background */
+.background-green .button:not(.secondary), .background-light-green .button:not(.secondary) {
   color: #fff;
   background: #4429d4;
   background: linear-gradient(12deg, #4429d4 85%, #745fde 100%);
 }
 
-section.background-green .button:not(.secondary):hover, section.background-light-green .button:not(.secondary):hover {
+.background-green .button:not(.secondary):hover, .background-light-green .button:not(.secondary):hover {
   filter: brightness(105%) saturate(107%);
 }
 
-/* secondary button */
+/* 
+
+  Secondary button 
+
+*/
 .button.secondary {
   color: #273345;
   text-decoration: underline;
@@ -436,7 +890,7 @@ section.background-green .button:not(.secondary):hover, section.background-light
 }
 
 /* darker shadow on some backgrounds */
-section:not(.background-yellow):not(.background-green):not(.background-blue) .button.secondary {
+:not(.background-yellow):not(.background-green):not(.background-blue) .button.secondary {
   box-shadow: 1px 1px 4px rgba(0,0,0,.16);
 }
 
@@ -445,7 +899,7 @@ section:not(.background-yellow):not(.background-green):not(.background-blue) .bu
   background: rgba(255,255,255,.25);
 }
 
-section:not(.background-yellow):not(.background-green):not(.background-blue) .button.secondary:hover {
+:not(.background-yellow):not(.background-green):not(.background-blue) .button.secondary:hover {
   color: #111827;
   background: #F9FAFB;
 }
@@ -459,7 +913,7 @@ section:not(.background-yellow):not(.background-green):not(.background-blue) .bu
 }
 
 
-/* text & email inputs */
+/* form inputs */
 
 input:not([type]), 
 input[type="email"], 
@@ -484,52 +938,125 @@ input[type="url"] {
 
 */
 
-.floating-label-container {
+fieldset {
   position: relative;
 }
 
-.floating-label-container input:not([type]):not(:placeholder-shown),
-.floating-label-container input[type="email"]:not(:placeholder-shown),
-.floating-label-container input[type="number"]:not(:placeholder-shown),
-.floating-label-container input[type="password"]:not(:placeholder-shown),
-.floating-label-container input[type="search"]:not(:placeholder-shown),
-.floating-label-container input[type="tel"]:not(:placeholder-shown),
-.floating-label-container input[type="text"]:not(:placeholder-shown),
-.floating-label-container input[type="url"]:not(:placeholder-shown) {
+fieldset input:not([type]):not(:placeholder-shown),
+fieldset input[type="email"]:not(:placeholder-shown),
+fieldset input[type="number"]:not(:placeholder-shown),
+fieldset input[type="password"]:not(:placeholder-shown),
+fieldset input[type="search"]:not(:placeholder-shown),
+fieldset input[type="tel"]:not(:placeholder-shown),
+fieldset input[type="text"]:not(:placeholder-shown),
+fieldset input[type="url"]:not(:placeholder-shown) {
   padding: 22px 16px 7px;
 }
 
-.floating-label-container input:not([type]):not(:placeholder-shown) + label,
-.floating-label-container input[type="email"]:not(:placeholder-shown) + label,
-.floating-label-container input[type="number"]:not(:placeholder-shown) + label,
-.floating-label-container input[type="password"]:not(:placeholder-shown) + label,
-.floating-label-container input[type="search"]:not(:placeholder-shown) + label,
-.floating-label-container input[type="tel"]:not(:placeholder-shown) + label,
-.floating-label-container input[type="text"]:not(:placeholder-shown) + label,
-.floating-label-container input[type="url"]:not(:placeholder-shown) + label {
+fieldset input:not([type]):not(:placeholder-shown) + label,
+fieldset input[type="email"]:not(:placeholder-shown) + label,
+fieldset input[type="number"]:not(:placeholder-shown) + label,
+fieldset input[type="password"]:not(:placeholder-shown) + label,
+fieldset input[type="search"]:not(:placeholder-shown) + label,
+fieldset input[type="tel"]:not(:placeholder-shown) + label,
+fieldset input[type="text"]:not(:placeholder-shown) + label,
+fieldset input[type="url"]:not(:placeholder-shown) + label {
   pointer-events: none;
   opacity: .75;
   transform: translate(0, -50%);
   font-size: 14px;
 }
 
-.floating-label-container input:not([type]):not(:placeholder-shown) + label::after,
-.floating-label-container input[type="email"]:not(:placeholder-shown) + label::after,
-.floating-label-container input[type="number"]:not(:placeholder-shown) + label::after,
-.floating-label-container input[type="password"]:not(:placeholder-shown) + label::after,
-.floating-label-container input[type="search"]:not(:placeholder-shown) + label::after,
-.floating-label-container input[type="tel"]:not(:placeholder-shown) + label::after,
-.floating-label-container input[type="text"]:not(:placeholder-shown) + label::after,
-.floating-label-container input[type="url"]:not(:placeholder-shown) + label::after {
+fieldset input:not([type]):not(:placeholder-shown) + label::after,
+fieldset input[type="email"]:not(:placeholder-shown) + label::after,
+fieldset input[type="number"]:not(:placeholder-shown) + label::after,
+fieldset input[type="password"]:not(:placeholder-shown) + label::after,
+fieldset input[type="search"]:not(:placeholder-shown) + label::after,
+fieldset input[type="tel"]:not(:placeholder-shown) + label::after,
+fieldset input[type="text"]:not(:placeholder-shown) + label::after,
+fieldset input[type="url"]:not(:placeholder-shown) + label::after {
   content: ":";
 }
 
-.floating-label-container label {
+fieldset label {
   position: absolute;
   left: 17px;
   top: 0;
   opacity: 0;
   transition: transform 200ms;
+}
+
+/* 
+
+  RANDOM UTILITIES 
+
+*/
+
+.logo {
+  max-width: 240px;
+}
+
+.clickable-media {
+  filter: grayscale(15%);
+}
+
+.clickable-media:hover {
+  cursor: pointer;
+  filter: grayscale(0%);
+}
+
+@media (min-width: 600px) and (max-width: 1099.98px) {
+  section.tablet-wide-inner-content-boxes:not(.content):not(.media) {
+    height: auto;
+    max-height: none;
+  }
+
+  section.tablet-wide-inner-content-boxes:not(.content):not(.media) > section.content {
+    width: auto;
+    height: auto;
+  }
+
+  section.tablet-wide-inner-content-boxes:not(.content):not(.media) > section.media {
+    min-width: 260px;
+    min-height: 260px;
+  }
+}
+
+
+/* NAVIGATION STYLES */
+
+nav, .content nav {
+  margin-left: auto;
+}
+
+nav, .content nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 0;
+}
+
+nav a:first-child, .content nav a:first-child {
+  margin-top: 0;
+}
+
+nav a, .content nav a {
+  margin-top: .5em;
+}
+
+@media (min-width: 600px) {
+  nav, .content nav {
+    display: block;
+  }
+
+  nav a, .content nav a {
+    margin-top: 0;
+    margin-left: 2rem;
+  }
+
+  nav a:first-child, .content nav:first-child {
+    margin-left: 0;
+  }
 }
 
 /*
@@ -542,116 +1069,10 @@ input[type="url"] {
 
 /* 
 
-  top-level boxes 
+  breakpoint for heading sizes:
 
-  aspect ratio = 5 width : 4 height
-
-*/
-
-body > section, body > section > section {
-  overflow: hidden;
-  /*
-    all boxes on mobile are 100% width
-
-    need to use % instead of vw because scrollbars in MS Edge take up width 
-    but aren't included in vw 
-  */
-  width: 100%;
-  /* 
-    for tablet viewport: let the boxes expand a little and not leave 
-    so much whitespace on the left/right sides of the screen
-
-    it won't expand larger than 100% width on mobile, so no worries
-  */
-  max-width: calc(var(--desktop-box-max-width) * 1.25);
-
-  /*
-    for tablet viewport: center all top-level boxes in the middle of the screen
-  */
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* 
-  MEDIA BOXES
-
-  media boxes always maintain their aspect ratios, even on mobile
-  other boxes don't maintain this aspect ratio on mobile
-*/
-.media {
-  position: relative;
-  padding: 0;
-}
-
-/* 
-  on mobile, top-level media boxes and second-level media boxes
-  become the same size — full-width & full-height (5:4)
-
-  how they maintain their aspect ratio: on mobile, the width is always 100% 
-  (i.e. pretty much 100vw except on MS Edge where there's a slight difference) 
-  and the height is always 40vw * 2 = 80vw, so the aspect ration of 5:4
-  is preserved with 100vw:80vw
-
-  and on tablet, where the top-level boxes are allowed to expand to max-width
-  (600px) * 1.25 and max-height (480px) * 1.25, the aspect ratio is preserved
-  there as well -- just 125% larger than on desktop/mobile
-*/
-body > .media, body > section > .media {
-  height: calc(var(--desktop-box-height) * 2);
-  max-height: calc(var(--desktop-box-max-height) * 1.25);
-}
-
-.media img, .media svg, .media video, .media iframe, .media object, .media embed, .media picture, .media canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  /* 
-    fill in gap between media and box that sometimes appears 
-    (by adding 2px to media's width and height) 
-  */
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
-  object-fit: cover;
-}
-
-body > section.wide.media {
-  height: var(--desktop-box-height); /* half normal height */
-  max-height: calc(var(--desktop-box-max-height) * .625); /* half normal height */
-}
-
-body > section.tall.media {
-  height: calc(var(--desktop-box-height) * 2 * 2); /* double normal height */
-  max-height: calc(var(--desktop-box-max-height) * 1.25 * 2); /* double normal height */
-}
-
-/*
-  
-  Boxes.css warnings!
-
-*/
-
-body > section.wide:not(.media):not(.content)::before, body > section.tall:not(.media):not(.content)::before {
-  display: inline-block;
-  content: "BOXES.CSS WARNING \A\A .wide boxes aren't supported at the top-level unless they're .media or .content boxes";
-  white-space: pre-wrap;
-  padding: 2px 5px;
-  color: #DC2626;
-  background: #FEF2F2;
-}
-
-body > section.wide:not(.media):not(.content)::before {
-  content: "BOXES.CSS WARNING \A\A .wide boxes aren't supported at the top-level unless they're .media or .content boxes";
-}
-
-body > section.tall:not(.media):not(.content)::before {
-  content: "BOXES.CSS WARNING \A\A .tall boxes aren't supported at the top-level unless they're .media or .content boxes";
-}
-
-/* 
-
-  breakpoint:
-
-  mobile devices (320px - 599.999px)
+  mobile devices 
+  320px (smallest) up to 549.98px
 
   difficult spot because top-level boxes get down to a minimum of 
   320px width here, the smallest that top-level boxes can get
@@ -661,7 +1082,37 @@ body > section.tall:not(.media):not(.content)::before {
 
 */
 
-@media (max-width: 549.999px) {
+@media (max-width: 549.98px) {
+  h1 {
+    font-size: 38px;
+    line-height: 1.15;
+  }
+
+  h2 {
+    font-size: 34px;
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-size: 30px;
+    line-height: 1.25;
+  }
+
+  h4 {
+    font-size: 24px;
+    line-height: 1.3;
+  }
+
+  h5 {
+    font-size: 21px;
+    line-height: 1.3;
+  }
+
+  h6 {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
   .h1 {
     font-size: 38px;
     line-height: 1.15;
@@ -697,60 +1148,80 @@ body > section.tall:not(.media):not(.content)::before {
 
   breakpoint:
 
-  tablet and desktop devices 
+  tablet devices
+
+  this is a weird spot because boxes get the largest they can get
+  second-level boxes have a min of 320px width and max of 375px width
+  and top-level boxes have a min of 640px width and max of 750px width
+
+  for this reason we want to bump up the font sizes at this size so that
+  content boxes don't have as much empty space
 
 */
-@media (min-width: 600px) {
 
-  /* 
-    on tablet, top-level non-content boxes (just like media boxes) maintain 
-    their aspect ratio, primarily so they're able to contain child boxes that 
-    also maintain their aspect ratio
-
-    on tablet, top-level content boxes lose their aspect ratio so they can
-    expand/contract as necessary
-
-    they lose this aspect ratio on mobile, where the content of the box is 
-    allowed to determine the height of the box
-
-    (note: we exclude media boxes here because the same styles are already
-      defined for media boxes on mobile, so it's unnecessary)
-  */
-  body > section:not(.content):not(.media) {
-    height: calc(var(--desktop-box-height) * 2);
-    max-height: calc(var(--desktop-box-max-height) * 1.25);
+@media (min-width: 640px) and (max-width: 1099.98px) {
+  body {
+    font-size: 21px;
   }
 
-  /* 
-    
-    second-level / nested boxes 
-
-    these are always inside a non-media, non-content box and expand to fill
-    some percentage of their container
-
-    on mobile, they're allowed to lose their aspect ratio and just fill up
-    as much as their content needs
-
-    aspect ratio = 5 width : 4 height
-
-    types:
-    - tall
-    - wide
-
-  */
-
-  body > section > section, body > section > .media {
-    float: left;
-    width: 50%;
-    height: 50%;
+  h1 {
+    font-size: 72px;
+    line-height: 1.1;
   }
 
-  body > section > .tall, body > section > .tall.media {
-    height: 100%;
+  h2 {
+    font-size: 58px;
+    line-height: 1.15;
   }
 
-  body > section > .wide, body > section > .wide.media {
-    width: 100%;
+  h3 {
+    font-size: 43px;
+    line-height: 1.2;
+  }
+
+  h4 {
+    font-size: 36px;
+    line-height: 1.25;
+  }
+
+  h5 {
+    font-size: 29px;
+    line-height: 1.3;
+  }
+
+  h6 {
+    font-size: 25px;
+    line-height: 1.4;
+  }
+
+  .h1 {
+    font-size: 72px;
+    line-height: 1.1;
+  }
+
+  .h2 {
+    font-size: 58px;
+    line-height: 1.15;
+  }
+
+  .h3 {
+    font-size: 43px;
+    line-height: 1.2;
+  }
+
+  .h4 {
+    font-size: 36px;
+    line-height: 1.25;
+  }
+
+  .h5 {
+    font-size: 29px;
+    line-height: 1.3;
+  }
+
+  .h6 {
+    font-size: 25px;
+    line-height: 1.4;
   }
 
 }
@@ -770,7 +1241,37 @@ body > section.tall:not(.media):not(.content)::before {
 
 */
 
-@media (min-width: 1100px) and (max-width: 1199.999px) {
+@media (min-width: 1100px) and (max-width: 1199.98px) {
+
+  h1 {
+    font-size: 54px;
+    line-height: 1.1;
+  }
+
+  h2 {
+    font-size: 42px;
+    line-height: 1.15;
+  }
+
+  h3 {
+    font-size: 32px;
+    line-height: 1.2;
+  }
+
+  h4 {
+    font-size: 26px;
+    line-height: 1.25;
+  }
+
+  h5 {
+    font-size: 21px;
+    line-height: 1.3;
+  }
+
+  h6 {
+    font-size: 18px;
+    line-height: 1.4;
+  }
 
   .h1 {
     font-size: 54px;
@@ -800,67 +1301,6 @@ body > section.tall:not(.media):not(.content)::before {
   .h6 {
     font-size: 18px;
     line-height: 1.4;
-  }
-
-}
-
-/* 
-
-  breakpoint:
-
-  desktop devices 
-
-*/
-@media (min-width: 1100px) {
-
-  /* 
-    cute hack that lets us use the body as a container to center 
-    everything inside it 
-  */
-  body {
-    padding-left: calc(50vw - 600px);
-    padding-right: calc(50vw - 600px);
-  }
-
-  /* 
-
-    top-level boxes 
-
-    every type of top-level box (i.e. section) should maintain its
-    aspect ration on desktop devices
-
-    on tablet and mobile, only .media boxes should maintain their
-    aspect ratios
-
-    aspect ratio = 5 width : 4 height
-
-  */
-
-  body > section:not(.content):not(.media), 
-  body > section.content, 
-  body > section.media, 
-  body > section.content.wide, 
-  body > section.media.wide {
-    float: left;
-    /* 
-      using % width instead of vw because scrollbars in MS Edge take up 
-      width but aren't included in the vw units, which makes each top-level
-      box half a scrollbar width too wide
-    */
-    width: 50%;
-    max-width: var(--desktop-box-max-width);
-    height: var(--desktop-box-height);
-    max-height: var(--desktop-box-max-height);
-  }
-
-  body > section.wide.media, body > section.wide.content {
-    width: 100%;
-    max-width: calc(var(--desktop-box-max-width) * 2);
-  }
-
-  body > section.tall.media, body > section.tall.content {
-    height: calc(var(--desktop-box-height) * 2);
-    max-height: calc(var(--desktop-box-max-height) * 2);
   }
 
 }
@@ -900,21 +1340,92 @@ body > section.tall:not(.media):not(.content)::before {
 
 */
 
-.tablet, .desktop {
-  display: none;
+.tablet,
+.tablet-inline,
+.tablet-inline-block,
+.tablet-flex,
+.tablet-inline-flex,
+.tablet-grid,
+.tablet-inline-grid {
+  display: none !important;
 }
 
+.desktop,
+.desktop-inline,
+.desktop-inline-block,
+.desktop-flex,
+.desktop-inline-flex,
+.desktop-grid,
+.desktop-inline-grid {
+  display: none !important;
+}
 
+.mobile {
+  display: block !important;
+}
 
+.mobile-inline {
+  display: inline !important;
+}
+
+.mobile-inline-block {
+  display: inline-block !important;
+}
+
+.mobile-flex {
+  display: flex !important;
+}
+
+.mobile-inline-flex {
+  display: inline-flex !important;
+}
+
+.mobile-grid {
+  display: grid !important;
+}
+
+.mobile-inline-grid {
+  display: inline-grid !important;
+}
 
 @media (min-width: 600px) {
 
-  .mobile {
-    display: none;
+  .mobile,
+  .mobile-inline,
+  .mobile-inline-block,
+  .mobile-flex,
+  .mobile-inline-flex,
+  .mobile-grid,
+  .mobile-inline-grid {
+    display: none !important;
   }
 
   .tablet {
-    display: revert;
+    display: block !important;
+  }
+
+  .tablet-inline {
+    display: inline !important;
+  }
+
+  .tablet-inline-block {
+    display: inline-block !important;
+  }
+
+  .tablet-flex {
+    display: flex !important;
+  }
+
+  .tablet-inline-flex {
+    display: inline-flex !important;
+  }
+
+  .tablet-grid {
+    display: grid !important;
+  }
+
+  .tablet-inline-grid {
+    display: inline-grid !important;
   }
 
   img.tablet,
@@ -946,12 +1457,42 @@ body > section.tall:not(.media):not(.content)::before {
 
 @media (min-width: 1100px) {
 
-  .tablet {
-    display: none;
+  .tablet,
+  .tablet-inline,
+  .tablet-inline-block,
+  .tablet-flex,
+  .tablet-inline-flex,
+  .tablet-grid,
+  .tablet-inline-grid {
+    display: none !important;
   }
 
   .desktop {
-    display: revert;
+    display: block !important;
+  }
+
+  .desktop-inline {
+    display: inline !important;
+  }
+
+  .desktop-inline-block {
+    display: inline-block !important;
+  }
+
+  .desktop-flex {
+    display: flex !important;
+  }
+
+  .desktop-inline-flex {
+    display: inline-flex !important;
+  }
+
+  .desktop-grid {
+    display: grid !important;
+  }
+
+  .desktop-inline-grid {
+    display: inline-grid !important;
   }
 
   img.desktop,
@@ -980,13 +1521,6 @@ body > section.tall:not(.media):not(.content)::before {
   }
 
 }
-
-
-
-
-
-
-
 
 
 

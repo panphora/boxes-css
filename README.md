@@ -1,5 +1,7 @@
 # boxes.css — focus on writing landing page content, not CSS
 
+Newly released full documentation: [BOXES.CSS DOCUMENTATION](https://docs.boxescss.com/)
+
 ## Boxes.css is the framework I've always dreamed of.
 
 I want to launch new projects every week or two, but I need to:
