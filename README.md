@@ -66,10 +66,10 @@ Example:
 Syntax:
 
 ```html
-<div class="floating-label-container">
+<fieldset>
   <input id="email" type="email" name="email" placeholder="Enter your email address">
   <label for="email">Enter your email address</label>
-</div>
+</fieldset>
 ```
 
 ## dealing with media
