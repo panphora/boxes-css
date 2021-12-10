@@ -1,0 +1,25 @@
+{
+  "name": "boxes-css",
+  "version": "0.5.0",
+  "description": "A CSS framework for building landing pages that lets you focus on writing content, not code!",
+  "main": "boxes.css",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/panphora/boxes-css.git"
+  },
+  "keywords": [
+    "css",
+    "framework",
+    "landing",
+    "pages"
+  ],
+  "author": "panphora",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/panphora/boxes-css/issues"
+  },
+  "homepage": "https://github.com/panphora/boxes-css#readme"
+}
