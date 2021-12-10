@@ -29,6 +29,20 @@ And takes care of the rest:
 
 **It's all you need to design a beautiful landing page!**
 
+## include the CSS
+
+minified version
+
+```html
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/browse/boxes-css@0.5.0/boxes.min.css">
+```
+
+unminified version
+
+```html
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/browse/boxes-css@0.5.0/boxes.css">
+```
+
 ## types of boxes
 
 always use `section` elements to define boxes
