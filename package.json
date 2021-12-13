@@ -1,6 +1,6 @@
 {
   "name": "boxes-css",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "A CSS framework for building landing pages that lets you focus on writing content, not code!",
   "main": "boxes.css",
   "scripts": {
